@@ -1,3 +1,17 @@
+<h1>Eventos</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+<button (click)="toggleButton()">Toggle Button</button>
+<p>Edad {{ person.age }}</p>
+<button (click)="increaseAge()">Age ++</button>
+<div class="box" (scroll)="onScroll($event)">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur commodi dolore asperiores sed officia, ipsam, repellat ut fugit eius natus ratione ullam? Commodi porro neque dolore explicabo? Necessitatibus, expedita tenetur.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur commodi dolore asperiores sed officia, ipsam, repellat ut fugit eius natus ratione ullam? Commodi porro neque dolore explicabo? Necessitatibus, expedita tenetur.</p>
+</div>
+<hr>
+
+<input type="text" [value]="person.name" placeholder="Hola" (keyup)="changeName($event)" />
+
+
 <h1>Propiedades</h1>
 <button [disabled]="btnDisabled">Enviar</button>
 <input type="text" [value]="name" placeholder="Hola" />
@@ -8,4 +22,4 @@
 
 <p>3 + 3 = {{ 3 + 3 }}</p>
 
-<h3>Hola, soy {{ name }} y tengo {{ age }}</h3>
+<h3>Hola, soy {{ person.name }} y tengo {{ person.age }}</h3>
