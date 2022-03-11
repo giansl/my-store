@@ -1,4 +1,12 @@
+<h1>NgModel</h1>
+
+<p>Nombre: {{ person.name }} </p>
+<input type="text" required #nameInut="ngModel" [(ngModel)]="person.name" placeholder="ss">
+<p>valid:  {{ nameInut.valid }}</p>
+<p>Age: {{ person.age }} </p>
+<input type="number" max="18" min="10" required #ageInut="ngModel" [(ngModel)]="person.age" placeholder="ss">
 <h1>Eventos</h1>
+<p>valid:  {{ ageInut.valid }}</p>
 <button [disabled]="btnDisabled">Enviar</button>
 <button (click)="toggleButton()">Toggle Button</button>
 <p>Edad {{ person.age }}</p>
