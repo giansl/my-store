@@ -6,6 +6,11 @@ import { Product } from './product.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  register = {
+    name: '',
+    email: '',
+    password: '',
+  }
   name = 'Nicolas';
   age = 18;
   img = '';
@@ -65,6 +70,10 @@ export class AppComponent {
 
   changeName(event: Event) {
     this.person.name = (event.target as HTMLInputElement).value;
+  }
+
+  onRegister() {
+    console.log(this.register);
   }
 
 }
