@@ -1,3 +1,10 @@
+<h1>Class y Style</h1>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" placeholder="ss">
+<p class="message-error" [class.invalid]="nameInput2.invalid">El campo es requerido</p>
+<label for="">Nombre</label>
+<input type="text" required #nameInput3="ngModel" [(ngModel)]="person.name" placeholder="ss">
+<p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'"> TExte texto</p>
+<hr>
 <h1>ngFor objs</h1>
 
 <div class="products--grid">
