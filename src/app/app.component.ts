@@ -6,6 +6,13 @@ import { Product } from './product.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  img: string = 'https://th.bing.com/th/id/OIP.jkfj3RRhE4S34BK4-NqXSgHaH3?pid=ImgDet&rs=1';
+
+  onLoaded(img: string) {
+    console.log('Imagen cargada Padre', img);
+  }
+  /*
   register = {
     name: '',
     email: '',
@@ -75,5 +82,5 @@ export class AppComponent {
   onRegister() {
     console.log(this.register);
   }
-
+*/
 }

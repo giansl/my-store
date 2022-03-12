@@ -1,5 +1,8 @@
-<h1>Form</h1>
+<input type="text" placeholder="Img" [(ngModel)]="img">
+<app-img [img]="img" (imgLoaded)="onLoaded($event)"></app-img>
 
+<h1>Form</h1>
+<!--
 <form (ngSubmit)="onRegister()" #myForm="ngForm">
   <div class="input-group">
     <label for="name">Nombre</label>
@@ -69,3 +72,4 @@
 <p>3 + 3 = {{ 3 + 3 }}</p>
 
 <h3>Hola, soy {{ person.name }} y tengo {{ person.age }}</h3>
+-->
