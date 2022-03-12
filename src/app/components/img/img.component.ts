@@ -10,7 +10,6 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   @Input() img: string = '';
   @Output() imgLoaded = new EventEmitter<string>();
   imgDefault: string = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-  counter = 0;
   constructor() {
     // before render
     // NO Async -- one time
@@ -27,10 +26,6 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     // before render
     // async -- fetch -- one time
     console.log('ngOnInit', 'imgValue => ', this.img);
-    setInterval(() => {
-      this.counter++;
-      console.log('run counter')
-    }  , 1000);
   }
 
   ngAfterViewInit(): void {

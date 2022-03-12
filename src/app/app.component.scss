@@ -1,26 +1,2 @@
-.box{
-  height: 200px;
-  width: 200px;
-  overflow: auto;
-  background-color: red;
-}
 
 
-
-.message-error{
-  background-color: red;
-  color: white;
-  opacity: 0;
-  transition: all linear 0.5s;
-  &.invalid{
-    opacity: 1;
-  }
-}
-
-@media screen and (min-width: 40em) {
-  .products--grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 15px;
-  }
-}
