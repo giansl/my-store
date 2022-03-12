@@ -1,19 +1,47 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-img',
   templateUrl: './img.component.html',
   styleUrls: ['./img.component.scss']
 })
-export class ImgComponent implements OnInit {
+export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   @Input() img: string = '';
   @Output() imgLoaded = new EventEmitter<string>();
   imgDefault: string = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
+  counter = 0;
+  constructor() {
+    // before render
+    // NO Async -- one time
+    console.log('ImgComponent constructor', 'imgValue => ', this.img);
+  }
 
-  constructor() { }
+  ngOnChanges(): void {
+    // before render
+    // changes inputs - times
+    console.log('ngOnChanges', 'imgValue => ', this.img);
+  }
 
   ngOnInit(): void {
+    // before render
+    // async -- fetch -- one time
+    console.log('ngOnInit', 'imgValue => ', this.img);
+    setInterval(() => {
+      this.counter++;
+      console.log('run counter')
+    }  , 1000);
+  }
+
+  ngAfterViewInit(): void {
+    // after render
+    // handle DOM children
+    console.log('ngAfterViewInit', 'imgValue => ', this.img);
+  }
+
+  ngOnDestroy(): void {
+    //delte
+    console.log('ngOnDestroy', 'imgValue => ', this.img);
   }
 
   imgError() {

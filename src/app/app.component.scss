@@ -5,19 +5,7 @@
   background-color: red;
 }
 
-.products--grid{
-  display: flex;
-  flex-direction: column;
-  div {
-    img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    h2{
-      margin: 0;
-    }
-  }
-}
+
 
 .message-error{
   background-color: red;
