@@ -1,5 +1,8 @@
 <p>La cantiad {{ myShoppingCart.length }}</p>
 <p>Total {{ total }}</p>
+<p>Today: {{ today | date: 'short' }}</p>
+<p>Today: {{ date | timeAgo }}</p>
+<p>{{ 'Hola bascusa asa' | vocals }}</p>
 <div class="products--grid">
   <app-product
     [product]="product"
