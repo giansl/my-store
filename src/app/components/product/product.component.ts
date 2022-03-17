@@ -12,18 +12,26 @@ export class ProductComponent {
     id: '',
     title: '',
     price: 0,
-    image: '',
+    images: [],
     description: '',
-    category: ''
+    category: {
+      id: '',
+      name: ''
+    }
   }
 
   // eslint-disable-next-line  @angular-eslint/no-output-on-prefix
   @Output() onAddToCartClicked = new EventEmitter<Product>();
+  @Output() onShowDetailClicked = new EventEmitter<string>();
 
   constructor() { }
 
   onAddToCart() {
     this.onAddToCartClicked.emit(this.product);
+  }
+
+  onShowDetail() {
+    this.onShowDetailClicked.emit(this.product.id);
   }
 
 }
