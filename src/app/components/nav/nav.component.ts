@@ -13,7 +13,6 @@ export class NavComponent implements OnInit {
 
   activeMenu: boolean = false;
   counter = 0;
-  token = '';
   profile: User | null = null;
 
   constructor(
@@ -35,13 +34,12 @@ export class NavComponent implements OnInit {
     this.authService.login('giansolis@gmail.com', '123456')
       .subscribe(
         (rta: Auth) => {
-        this.token = rta.access_token;
         this.getProfile();
     });
   }
 
   getProfile(){
-    this.authService.profile(this.token)
+    this.authService.profile()
       .subscribe(
         (user:User) => {
         this.profile = user;

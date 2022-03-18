@@ -14,7 +14,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { VocalsPipe } from './pipes/vocals.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
-import { TimeInterceptor } from './interceptor/time.interceptor';
+import { TimeInterceptor } from './interceptors/time.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TimeInterceptor } from './interceptor/time.interceptor';
     SwiperModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
