@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
+import { retry, catchError, throwError, map,  } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products';
+  private apiUrl = `${ environment.API_URL }/api/products`;
   constructor(
     private http: HttpClient
   ) { }
@@ -18,7 +20,16 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(this.apiUrl, {params});
+    return this.http.get<Product[]>(this.apiUrl, {params})
+    .pipe(
+      retry(3),
+      map(products => products.map(product => {
+        return {
+          ...product,
+          taxes: .19 * product.price
+        };
+      })),
+    );
   }
 
   getProductsByPage(limit: number, offset: number) {
@@ -28,7 +39,21 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    return this.http.get<Product>(this.apiUrl + '/' + id);
+    return this.http.get<Product>(`${ this.apiUrl }/${ id }`)
+    .pipe(
+      catchError((err: HttpErrorResponse) => {
+        if(err.status === HttpStatusCode.NotFound) {
+          return throwError(() => { new Error('Producto no existe') });
+        }
+        if(err.status === HttpStatusCode.Conflict) {
+          return throwError(() => { new Error('Algo esa fallando en el server') });
+        }
+        if(err.status === HttpStatusCode.Unauthorized) {
+          return throwError(() => { new Error('No esta aturizado') });
+        }
+        return throwError(() => { new Error('Producto no existe') });
+      })
+    );
   }
 
   create(product: CreateProductDTO) {
@@ -36,11 +61,11 @@ export class ProductsService {
   }
 
   update(id: string, dto: UpdateProductDTO) {
-    return this.http.put<Product>(this.apiUrl + '/' + id, dto);
+    return this.http.put<Product>(`${ this.apiUrl }/${ id }`, dto);
   }
 
   delete(id: string) {
-    return this.http.delete<boolean>(this.apiUrl + '/' + id);
+    return this.http.delete<boolean>(`${ this.apiUrl }/${ id }`);
   }
 
 }

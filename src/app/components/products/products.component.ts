@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap, zip } from 'rxjs';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -18,6 +19,7 @@ export class ProductsComponent implements OnInit {
   showProductDetail = false;
   limit = 10;
   offset = 0;
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
   product: Product = {
     id: '',
     title: '',
@@ -52,12 +54,40 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string){
+    this.statusDetail = 'loading';
     this.productsService.getProduct(id).subscribe(
       (product: Product) => {
         console.log(product);
         this.product = product;
         this.toogleProductDetail();
+        this.statusDetail = 'success';
+      }, errorMessage => {
+        window.alert(errorMessage);
+        this.statusDetail = 'error';
       });
+  }
+
+  readAndUpdate(id: string) {
+    this.productsService.getProduct(id)
+    .pipe(
+      switchMap(product => {
+        return this.productsService.update(product.id, {
+          title: 'chamge'
+        })
+      })
+    )
+    .subscribe(
+      (product: Product) => {
+
+    });
+
+    zip(
+      this.productsService.getProduct(id),
+      this.productsService.update(id, {title: 'chamge'})
+    ).subscribe(response => {
+      console.log(response[0]);
+      console.log(response[1]);
+    })
   }
 
   createNewProduct() {
@@ -124,3 +154,7 @@ export class ProductsComponent implements OnInit {
   }
 
 }
+function subscribe(arg0: (response: any) => void) {
+  throw new Error('Function not implemented.');
+}
+

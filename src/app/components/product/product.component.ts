@@ -22,6 +22,7 @@ export class ProductComponent {
 
   // eslint-disable-next-line  @angular-eslint/no-output-on-prefix
   @Output() onAddToCartClicked = new EventEmitter<Product>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onShowDetailClicked = new EventEmitter<string>();
 
   constructor() { }
