@@ -15,6 +15,12 @@ export class ProductsComponent {
   total: number = 0;
   @Input() products: Product[] = [];
   @Output() loadMore = new EventEmitter();
+  @Input()
+   set productId(id: string | null) {
+    if(id){
+      this.onShowDetail(id);
+    }
+   };
   today = new Date();
   date = new Date(2021, 1, 21);
   showProductDetail = false;
@@ -50,11 +56,14 @@ export class ProductsComponent {
 
   onShowDetail(id: string){
     this.statusDetail = 'loading';
+    if(!this.showProductDetail){
+      this.showProductDetail = true;
+    }
     this.productsService.getProduct(id).subscribe(
       (product: Product) => {
         console.log(product);
         this.product = product;
-        this.toogleProductDetail();
+       // this.toogleProductDetail();
         this.statusDetail = 'success';
       }, errorMessage => {
         window.alert(errorMessage);
