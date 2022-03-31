@@ -24,7 +24,8 @@ export class AppComponent {
     this.usersService.create({
       name: 'John Doe',
       email: 'giansolis@gmail.com',
-      password: '123456'
+      password: '123456',
+      role: 'customer'
     })
     .subscribe(user => {
       console.log(user);
